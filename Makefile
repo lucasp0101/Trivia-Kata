@@ -1,6 +1,9 @@
-FILES = GameRunner.cpp Game.cpp Game.h
-TEST_FILES = Game.cpp Game.h
+SRC_DIR = src
+INC_DIR = src/include
+FILES = GameRunner.cpp Game.cpp
+TEST_FILES = Game.cpp
 CC = g++
+INC = -I$(INC_DIR)
 OPTS = -std=c++17 -Wall -Wextra -Werror
 OUTOPTS = -o 
 OUT = out/trivia
@@ -16,13 +19,13 @@ tests: test runTest
 	mkdir -p out
 
 build: .outputFolder
-	$(CC) $(FILES) $(OPTS) $(OUTOPTS) $(OUT)
+	$(CC) $(addprefix $(SRC_DIR)/,$(FILES)) $(INC) $(OPTS) $(OUTOPTS) $(OUT)
 
 run: 
 	./$(OUT)
 
 test: .outputFolder
-	$(CC) $(TEST_FILES) $(OPTS) $(OUTOPTS) $(TEST_OUT)
+	$(CC) $(addprefix $(SRC_DIR)/,$(TEST_FILES)) $(INC) $(OPTS) $(OUTOPTS) $(TEST_OUT)
 
 runTest: 
 	./$(TEST_OUT)

@@ -1,0 +1,5 @@
+set(SRC_LIB_NAME GameLib)
+set(INC_LIB_NAME include)
+add_library(${SRC_LIB_NAME} Game.cpp)
+target_sources(${SRC_LIB_NAME} PRIVATE ${INC_LIB_NAME}/Game.h)
+target_include_directories(${SRC_LIB_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/${INC_LIB_NAME})
