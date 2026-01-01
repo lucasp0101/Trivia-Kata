@@ -1,5 +1,8 @@
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #define APPROVALS_CATCH2_V3
 #include <ApprovalTests.hpp>
+#pragma GCC diagnostic pop
 #include "Game.h"
 #include "GameRunner_ForTesting.h"
 

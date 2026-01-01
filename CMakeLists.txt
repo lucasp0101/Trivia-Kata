@@ -21,7 +21,7 @@ FetchContent_Declare(
   )
 FetchContent_MakeAvailable(catch2 approval_tests)
 
-set(CMAKE_CXX_FLAGS "--coverage -O0 -g")
+set(CMAKE_CXX_FLAGS "--coverage -O0 -g -Werror -Wall -Wextra -pedantic -Wcast-align -Wcast-qual -Wctor-dtor-privacy -Wdisabled-optimization -Wformat=2 -Winit-self -Wlogical-op -Wmissing-include-dirs -Wnoexcept -Wold-style-cast -Woverloaded-virtual -Wredundant-decls -Wshadow -Wsign-promo -Wstrict-null-sentinel -Wstrict-overflow=5 -Wundef -Wno-unused -Wno-variadic-macros -Wno-parentheses -fdiagnostics-show-option")
 
 include(CTest)
 enable_testing()
