@@ -4,21 +4,27 @@
 #include <list>
 #include <vector>
 
+#define MAX_N_QUESTIONS_PER_CATEGORY 50
+#define MAX_QUESTION_LENGTH 127
 class Game
 {
 
   public:
     Game();
+    std::string createPopQuestion(int index);
+    std::string createScienceQuestion(int index);
+    std::string createSportsQuestion(int index);
     void initGameLoop();
 
     std::string createRockQuestion(int index);
-    bool isPlayable();
-    bool add(std::string playerName);
+    bool addPlayer(std::string playerName);
 
-    int howManyPlayers();
     void roll(int roll);
 
+    void updateCurrentPlayersPositionAfterRoll(int roll);
+
     bool wasCorrectlyAnswered();
+    void advanceCurrentPlayer();
     bool wrongAnswer();
 
   private:
