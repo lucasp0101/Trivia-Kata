@@ -8,8 +8,7 @@
 
 // This puts "received" and "approved" files in approval_tests/ sub-directory,
 // keeping the test source directory tidy:
-auto directoryDisposer =
-    ApprovalTests::Approvals::useApprovalsSubdirectory("approval_tests");
+auto directoryDisposer = ApprovalTests::Approvals::useApprovalsSubdirectory("approval_tests");
 
 TEST_CASE("GameRunner_ForTesting::runMain RS 0", "Main test run: random seed 0")
 {

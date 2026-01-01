@@ -1,43 +1,29 @@
-#include <stdlib.h>
-#include <sstream>
-#include "Game.h"
 #include "GameRunner_ForTesting.h"
+#include "Game.h"
+#include <sstream>
+#include <stdlib.h>
 
 static bool notAWinner;
 
 // ! Changed "int main" to "void runMain"
 void runMain(int seed)
 {
-	// srand(time(NULL)); Previous case. Changed for deterministic testing
-	srand(seed);
-	Game aGame;
+    // srand(time(NULL)); Previous case. Changed for deterministic testing
+    srand(seed);
+    Game aGame;
 
-	aGame.add("Chet");
-	aGame.add("Pat");
-	aGame.add("Sue");
+    aGame.add("Chet");
+    aGame.add("Pat");
+    aGame.add("Sue");
 
-	do
-	{
-
-		aGame.roll(rand() % 5 + 1);
-
-		if (rand() % 9 == 7)
-		{
-			notAWinner = aGame.wrongAnswer();
-		}
-		else
-		{
-			notAWinner = aGame.wasCorrectlyAnswered();
-		}
-	} while (notAWinner);
-
+    aGame.initGameLoop();
 }
 
 std::string wrapperForMain(int seed)
 {
-	std::stringstream stream;
-    auto * old = std::cout.rdbuf(stream.rdbuf());
-    
+    std::stringstream stream;
+    auto *old = std::cout.rdbuf(stream.rdbuf());
+
     runMain(seed);
 
     std::cout.rdbuf(old);
