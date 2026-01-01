@@ -6,6 +6,8 @@
 
 #define MAX_N_QUESTIONS_PER_CATEGORY 50
 #define MAX_QUESTION_LENGTH 127
+#define MAX_N_CATECORIES 4
+
 class Game
 {
 
@@ -16,16 +18,22 @@ class Game
     std::string createSportsQuestion(int index);
     void initGameLoop();
 
-    std::string createRockQuestion(int index);
-    bool addPlayer(std::string playerName);
+    bool processCorrectAnswer();
 
-    void roll(int roll);
+    void processIncorrectAnswer();
+
+    int rollDice();
+
+    bool playerGetsOutOfPenaltyBox(int diceResult);
+
+    bool questionWasAnsweredCorrectly();
+
+    std::string createRockQuestion(int index);
+    void addPlayer(std::string playerName);
 
     void updateCurrentPlayersPositionAfterRoll(int roll);
 
-    bool wasCorrectlyAnswered();
     void advanceCurrentPlayer();
-    bool wrongAnswer();
 
   private:
     std::vector<std::string> players;
@@ -40,7 +48,7 @@ class Game
     std::list<std::string> sportsQuestions;
     std::list<std::string> rockQuestions;
     
-    unsigned int currentPlayer;
+    unsigned int currentPlayerIndex;
     bool isGettingOutOfPenaltyBox;
 
     void askQuestion();
