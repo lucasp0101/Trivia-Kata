@@ -7,8 +7,8 @@ add_executable(${UNIT_TEST_NAME})
 target_sources(${APPROVAL_TEST_NAME} PRIVATE TriviaGame_ApprovalTests.cpp)
 target_sources(${UNIT_TEST_NAME} PRIVATE TriviaGame_UnitTests.cpp)
 
-target_link_libraries(${APPROVAL_TEST_NAME} GameLib ApprovalTests::ApprovalTests Catch2::Catch2 Catch2::Catch2WithMain)
-target_link_libraries(${UNIT_TEST_NAME} GameLib ApprovalTests::ApprovalTests Catch2::Catch2 Catch2::Catch2WithMain)
+target_link_libraries(${APPROVAL_TEST_NAME} GameLib_ForTesting ApprovalTests::ApprovalTests Catch2::Catch2 Catch2::Catch2WithMain)
+target_link_libraries(${UNIT_TEST_NAME} GameLib_ForTesting ApprovalTests::ApprovalTests Catch2::Catch2 Catch2::Catch2WithMain)
 
 add_test(
     NAME ${APPROVAL_TEST_NAME}
