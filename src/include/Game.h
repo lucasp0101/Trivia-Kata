@@ -7,6 +7,7 @@
 #define MAX_N_QUESTIONS_PER_CATEGORY 50
 #define MAX_QUESTION_LENGTH 127
 #define MAX_N_CATECORIES 4
+#define MAX_PLACE_PLAYER 12 
 
 class Game
 {
@@ -17,6 +18,10 @@ class Game
     std::string createScienceQuestion(int index);
     std::string createSportsQuestion(int index);
     void initGameLoop();
+
+    void increaseCurrentPlayersCoins();
+
+    bool canPlayerAct(int diceResult);
 
     bool processCorrectAnswer();
 

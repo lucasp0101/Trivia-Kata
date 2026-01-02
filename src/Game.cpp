@@ -57,7 +57,7 @@ void Game::addPlayer(std::string playerName)
 void Game::updateCurrentPlayersPositionAfterRoll(int roll)
 {
     places[currentPlayerIndex] += roll;
-    places[currentPlayerIndex] %= 12;
+    places[currentPlayerIndex] %= MAX_PLACE_PLAYER;
 
     std::cout << players[currentPlayerIndex] << "'s new location is " << places[currentPlayerIndex] << std::endl;
 }
@@ -114,31 +114,20 @@ void Game::advanceCurrentPlayer()
 
 bool Game::didPlayerWin()
 {
-    return !(purses[currentPlayerIndex] == 6);
+    return purses[currentPlayerIndex] == 6;
 }
 
 void Game::initGameLoop()
 {
-    bool thereIsNoWinner = true;
+    bool thereIsWinner = false;
 
-    while (thereIsNoWinner)
+    while (!thereIsWinner)
     {
         int diceResult = rollDice();
 
-        if (inPenaltyBox[currentPlayerIndex] && !playerGetsOutOfPenaltyBox(diceResult))
-        {
-            std::cout << players[currentPlayerIndex] << " is not getting out of the penalty box" << std::endl;
-            isGettingOutOfPenaltyBox = false;
-        }
-        else if (inPenaltyBox[currentPlayerIndex] && playerGetsOutOfPenaltyBox(diceResult))
-        {
-            std::cout << players[currentPlayerIndex] << " is getting out of the penalty box" << std::endl;
-            isGettingOutOfPenaltyBox = true;
+        bool playerCanAct = canPlayerAct(diceResult);
 
-            updateCurrentPlayersPositionAfterRoll(diceResult);            
-            askQuestion();
-        }
-        else if (!(inPenaltyBox[currentPlayerIndex]))
+        if(playerCanAct)
         {
             updateCurrentPlayersPositionAfterRoll(diceResult);
             askQuestion();
@@ -146,15 +135,12 @@ void Game::initGameLoop()
 
         if (questionWasAnsweredCorrectly())
         {
-            bool playerCanMove = inPenaltyBox[currentPlayerIndex] && !isGettingOutOfPenaltyBox;
-
-            if (!playerCanMove)
+            if (playerCanAct)
             {
                 std::cout << "Answer was correct!!!!" << std::endl;
-                purses[currentPlayerIndex]++;
-                std::cout << players[currentPlayerIndex] << " now has " << purses[currentPlayerIndex] << " Gold Coins." << std::endl;
-                
-                thereIsNoWinner = didPlayerWin();
+                increaseCurrentPlayersCoins();
+
+                thereIsWinner = didPlayerWin();
             }
         }
         else
@@ -167,6 +153,32 @@ void Game::initGameLoop()
         }
         advanceCurrentPlayer();
     }
+}
+
+void Game::increaseCurrentPlayersCoins()
+{
+    purses[currentPlayerIndex]++;
+    std::cout << players[currentPlayerIndex] << " now has " << purses[currentPlayerIndex] << " Gold Coins."
+              << std::endl;
+}
+
+bool Game::canPlayerAct(int diceResult)
+{
+    if (inPenaltyBox[currentPlayerIndex])
+    {
+        if (playerGetsOutOfPenaltyBox(diceResult))
+        {
+            std::cout << players[currentPlayerIndex] << " is getting out of the penalty box" << std::endl;
+            return true;
+        }
+        else
+        {
+            std::cout << players[currentPlayerIndex] << " is not getting out of the penalty box" << std::endl;
+            return false;
+        }
+    }
+
+    return true;
 }
 
 int Game::rollDice()
