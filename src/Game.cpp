@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Game::Game() : places{}, purses{}, currentPlayerIndex(0)
+Game::Game() : currentPlayerIndex(0)
 {
     for (int i = 0; i < MAX_N_QUESTIONS_PER_CATEGORY; i++)
     {
@@ -49,10 +49,7 @@ void Game::addPlayer(std::string playerName)
     if (players.size() >= MAX_N_PLAYERS)
         throw MoreThanMaximumPlayersException("There was an attempt to add more than six players to a Game instance");
 
-    players.push_back(playerName);
-    places[players.size()-1] = 0;
-    purses[players.size()-1] = 0;
-    inPenaltyBox[players.size()-1] = false;
+    players.push_back(Player(playerName));
 
     std::cout << playerName << " was added" << std::endl;
     std::cout << "They are player number " << players.size() << std::endl;
@@ -60,10 +57,10 @@ void Game::addPlayer(std::string playerName)
 
 void Game::updateCurrentPlayersPositionAfterRoll(int roll)
 {
-    places[currentPlayerIndex] += roll;
-    places[currentPlayerIndex] %= MAX_PLACE_PLAYER;
+    int new_position = (players[currentPlayerIndex].getPlace() + roll) % MAX_PLACE_PLAYER;
+    players[currentPlayerIndex].setPlace(new_position);
 
-    std::cout << players[currentPlayerIndex] << "'s new location is " << places[currentPlayerIndex] << std::endl;
+    std::cout << players[currentPlayerIndex].getName() << "'s new location is " << players[currentPlayerIndex].getPlace() << std::endl;
 }
 
 void Game::askQuestion()
@@ -94,7 +91,7 @@ void Game::askQuestion()
 
 std::string Game::currentCategory()
 {
-    switch (places[currentPlayerIndex] % MAX_N_CATECORIES)
+    switch (players[currentPlayerIndex].getPlace() % MAX_N_CATECORIES)
     {
         case 0:
             return "Pop";
@@ -118,7 +115,7 @@ void Game::advanceCurrentPlayer()
 
 bool Game::didPlayerWin()
 {
-    return purses[currentPlayerIndex] == 6;
+    return players[currentPlayerIndex].getPurse() == WINNING_N_COINS;
 }
 
 void Game::initGameLoop()
@@ -151,8 +148,8 @@ void Game::initGameLoop()
         {
             std::cout << "Question was incorrectly answered" << std::endl;
     
-            std::cout << players[currentPlayerIndex] + " was sent to the penalty box" << std::endl;
-            inPenaltyBox[currentPlayerIndex] = true;
+            std::cout << players[currentPlayerIndex].getName() + " was sent to the penalty box" << std::endl;
+            players[currentPlayerIndex].setInPenalty(true);
     
         }
         advanceCurrentPlayer();
@@ -161,23 +158,23 @@ void Game::initGameLoop()
 
 void Game::increaseCurrentPlayersCoins()
 {
-    purses[currentPlayerIndex]++;
-    std::cout << players[currentPlayerIndex] << " now has " << purses[currentPlayerIndex] << " Gold Coins."
+    players[currentPlayerIndex].setPurse(players[currentPlayerIndex].getPurse() + 1);
+    std::cout << players[currentPlayerIndex].getName() << " now has " << players[currentPlayerIndex].getPurse() << " Gold Coins."
               << std::endl;
 }
 
 bool Game::canPlayerAct(int diceResult)
 {
-    if (inPenaltyBox[currentPlayerIndex])
+    if (players[currentPlayerIndex].getInPenalty())
     {
         if (playerGetsOutOfPenaltyBox(diceResult))
         {
-            std::cout << players[currentPlayerIndex] << " is getting out of the penalty box" << std::endl;
+            std::cout << players[currentPlayerIndex].getName() << " is getting out of the penalty box" << std::endl;
             return true;
         }
         else
         {
-            std::cout << players[currentPlayerIndex] << " is not getting out of the penalty box" << std::endl;
+            std::cout << players[currentPlayerIndex].getName() << " is not getting out of the penalty box" << std::endl;
             return false;
         }
     }
@@ -188,7 +185,7 @@ bool Game::canPlayerAct(int diceResult)
 int Game::rollDice()
 {
     int diceResult = rand() % 5 + 1;
-    std::cout << players[currentPlayerIndex] << " is the current player" << std::endl;
+    std::cout << players[currentPlayerIndex].getName() << " is the current player" << std::endl;
     std::cout << "They have rolled a " << diceResult << std::endl;
 
     return diceResult;
