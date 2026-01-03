@@ -3,3 +3,4 @@ Debug
 .cproject
 out/
 build/
+.vscode/

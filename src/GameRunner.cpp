@@ -1,11 +1,11 @@
 #include "Game.h"
 #include <stdlib.h>
 
-static bool notAWinner;
+//static bool notAWinner;
 
 int main()
 {
-
+    // srand(time(NULL)); Previous case. Changed for deterministic testing
     srand(time(NULL));
     Game aGame;
 
@@ -13,18 +13,5 @@ int main()
     aGame.addPlayer("Pat");
     aGame.addPlayer("Sue");
 
-    do
-    {
-
-        aGame.roll(rand() % 5 + 1);
-
-        if (rand() % 9 == 7)
-        {
-            notAWinner = aGame.wrongAnswer();
-        }
-        else
-        {
-            notAWinner = aGame.wasCorrectlyAnswered();
-        }
-    } while (notAWinner);
+    aGame.initGameLoop();
 }

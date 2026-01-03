@@ -46,6 +46,7 @@ std::string Game::createRockQuestion(int index)
 void Game::addPlayer(std::string playerName)
 {
     players.push_back(playerName);
+    // ! places[players.size()] initializes the wrong indices + can end up accessing uninitialised memory
     places[players.size()] = 0;
     purses[players.size()] = 0;
     inPenaltyBox[players.size()] = false;

@@ -41,6 +41,8 @@ class Game
     void advanceCurrentPlayer();
 
   private:
+    // ! players has unlimited capacity, while places and purses do not. The possible errors derived 
+    // ! from this (adding more than 6 players) are not checked.
     std::vector<std::string> players;
 
     int places[6];
