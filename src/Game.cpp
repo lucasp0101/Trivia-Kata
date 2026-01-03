@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "MoreThanMaximumPlayersException.h"
 #include <iostream>
 #include <sstream>
 #include <stdio.h>
@@ -45,10 +46,13 @@ std::string Game::createRockQuestion(int index)
 
 void Game::addPlayer(std::string playerName)
 {
+    if (players.size() >= MAX_N_PLAYERS)
+        throw MoreThanMaximumPlayersException("There was an attempt to add more than six players to a Game instance");
+
     players.push_back(playerName);
     places[players.size()-1] = 0;
     purses[players.size()-1] = 0;
-    inPenaltyBox[players.size()] = false;
+    inPenaltyBox[players.size()-1] = false;
 
     std::cout << playerName << " was added" << std::endl;
     std::cout << "They are player number " << players.size() << std::endl;

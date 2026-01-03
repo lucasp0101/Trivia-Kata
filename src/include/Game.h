@@ -7,7 +7,14 @@
 #define MAX_N_QUESTIONS_PER_CATEGORY 50
 #define MAX_QUESTION_LENGTH 127
 #define MAX_N_CATECORIES 4
-#define MAX_PLACE_PLAYER 12 
+#define MAX_PLACE_PLAYER 12
+
+// * An unlimited players vector and statically-defined sized places/purses... arrays 
+// * present a contradictary idea for how many players should be allowed to play. 
+// * Because the fixed size was defined with a magic number, and in a real situation I
+// * wouldn't be sure if unlimited players could have other side effects, I chose to keep
+// * the maximum number of players. 
+#define MAX_N_PLAYERS 6
 
 class Game
 {
@@ -23,10 +30,6 @@ class Game
 
     bool canPlayerAct(int diceResult);
 
-    bool processCorrectAnswer();
-
-    void processIncorrectAnswer();
-
     int rollDice();
 
     bool playerGetsOutOfPenaltyBox(int diceResult);
@@ -41,14 +44,11 @@ class Game
     void advanceCurrentPlayer();
 
   private:
-    // ! players has unlimited capacity, while places and purses do not. The possible errors derived 
-    // ! from this (adding more than 6 players) are not checked.
     std::vector<std::string> players;
 
-    int places[6];
-    int purses[6];
-
-    bool inPenaltyBox[6];
+    int places[MAX_N_PLAYERS];
+    int purses[MAX_N_PLAYERS];
+    bool inPenaltyBox[MAX_N_PLAYERS];
 
     std::list<std::string> popQuestions;
     std::list<std::string> scienceQuestions;
