@@ -8,24 +8,17 @@
 class QuestionManager
 {
   public:
-    QuestionManager();
+    QuestionManager() : popQuestionIndex(0), scienceQuestionIndex(0), sportsQuestionIndex(0), rockQuestionIndex(0)
+    {
+    }
 
     bool questionWasAnsweredCorrectly();
 
     void askQuestion(std::string currentPlayerCategory);
-
     
   private:
-    std::string createPopQuestion(int index);
-
-    std::string createScienceQuestion(int index);
-
-    std::string createSportsQuestion(int index);
-
-    std::string createRockQuestion(int index);
-
-    std::list<std::string> popQuestions;
-    std::list<std::string> scienceQuestions;
-    std::list<std::string> sportsQuestions;
-    std::list<std::string> rockQuestions;
+    unsigned int popQuestionIndex;
+    unsigned int scienceQuestionIndex;
+    unsigned int sportsQuestionIndex;
+    unsigned int rockQuestionIndex;
 };
