@@ -109,9 +109,15 @@ void Game::initGameLoop()
 
     while (!thereIsWinner)
     {
+        std::cout << players[currentPlayerIndex].getName() << " is the current player" << std::endl;
+        
         int diceResult = rollDice();
 
-        bool playerCanAct = canPlayerAct(diceResult);
+        bool playerCanAct = true;
+        if (players[currentPlayerIndex].getInPenalty())
+        {
+            playerCanAct =  doesPlayerGetOutOfPenaltyBox(diceResult);
+        }
 
         if (playerCanAct)
         {
@@ -136,24 +142,14 @@ void Game::initGameLoop()
             std::cout << players[currentPlayerIndex].getName() + " was sent to the penalty box" << std::endl;
             players[currentPlayerIndex].setInPenalty(true);
         }
+        
         advanceCurrentPlayer();
     }
-}
-
-bool Game::canPlayerAct(int diceResult)
-{
-    if (players[currentPlayerIndex].getInPenalty())
-    {
-        return doesPlayerGetOutOfPenaltyBox(diceResult);
-    }
-
-    return true;
 }
 
 int Game::rollDice()
 {
     int diceResult = rand() % 5 + 1;
-    std::cout << players[currentPlayerIndex].getName() << " is the current player" << std::endl;
     std::cout << "They have rolled a " << diceResult << std::endl;
 
     return diceResult;

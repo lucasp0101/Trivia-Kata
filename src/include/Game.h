@@ -33,10 +33,6 @@ class Game
 
     void initGameLoop();
 
-    void increaseCurrentPlayersCoins();
-
-    bool canPlayerAct(int diceResult);
-
     int rollDice();
 
     bool doesPlayerGetOutOfPenaltyBox(int diceResult);
