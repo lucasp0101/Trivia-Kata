@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <list>
+#include <map>
 
 #define MAX_N_QUESTIONS_PER_CATEGORY 50
 #define MAX_QUESTION_LENGTH 127
@@ -9,9 +10,7 @@
 class QuestionManager
 {
   public:
-    QuestionManager() : popQuestionIndex(0), scienceQuestionIndex(0), sportsQuestionIndex(0), rockQuestionIndex(0)
-    {
-    }
+    QuestionManager();
 
     bool questionWasAnsweredCorrectly();
 
@@ -20,8 +19,5 @@ class QuestionManager
     void askQuestion(int playerPlace);
     
   private:
-    unsigned int popQuestionIndex;
-    unsigned int scienceQuestionIndex;
-    unsigned int sportsQuestionIndex;
-    unsigned int rockQuestionIndex;
+    std::map<std::string, unsigned int> questionCategoryCounters;
 };

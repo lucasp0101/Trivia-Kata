@@ -1,6 +1,16 @@
 #include "QuestionManager.h"
 #include <iostream>
 
+QuestionManager::QuestionManager()
+{
+    questionCategoryCounters = 
+    {
+        {"Pop", 0},
+        {"Science", 0},
+        {"Sports", 0},
+        {"Rock", 0}
+    };
+}
 
 bool QuestionManager::questionWasAnsweredCorrectly()
 {
@@ -30,24 +40,6 @@ void QuestionManager::askQuestion(int playerPlace)
     std::string currentPlayerCategory = currentCategory(playerPlace);
     std::cout << "The category is " << currentPlayerCategory << std::endl;
 
-    if (currentPlayerCategory == "Pop")
-    {
-        std::cout << "Pop Question " << popQuestionIndex << std::endl;
-        popQuestionIndex++;
-    }
-    else if (currentPlayerCategory == "Science")
-    {
-        std::cout << "Science Question " << scienceQuestionIndex << std::endl;
-        scienceQuestionIndex++;
-    }
-    else if (currentPlayerCategory == "Sports")
-    {
-        std::cout << "Sports Question " << sportsQuestionIndex << std::endl;
-        sportsQuestionIndex++;
-    }
-    else if (currentPlayerCategory == "Rock")
-    {
-        std::cout << "Rock Question " << rockQuestionIndex << std::endl;
-        rockQuestionIndex++;
-    }
+    std::cout << currentPlayerCategory << " Question " << this->questionCategoryCounters.at(currentPlayerCategory) << std::endl;
+    this->questionCategoryCounters.at(currentPlayerCategory)++;
 }
