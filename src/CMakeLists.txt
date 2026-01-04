@@ -6,7 +6,7 @@ set(GAME_RUNNER_NAME GameRunner)
 set(INC_LIB_NAME include)
 
 add_library(${SRC_LIB_NAME} Game.cpp Player.cpp QuestionManager.cpp)
-target_sources(${SRC_LIB_NAME} PRIVATE ${INC_LIB_NAME}/Game.h ${INC_LIB_NAME}/Player.h ${INC_LIB_NAME}/Question.h ${INC_LIB_NAME}/QuestionManager.h)
+target_sources(${SRC_LIB_NAME} PRIVATE ${INC_LIB_NAME}/Game.h ${INC_LIB_NAME}/Player.h ${INC_LIB_NAME}/QuestionManager.h)
 target_include_directories(${SRC_LIB_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/${INC_LIB_NAME})
 
 add_executable(${GAME_RUNNER_NAME} GameRunner.cpp)

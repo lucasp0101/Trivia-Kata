@@ -5,10 +5,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Game::Game() : currentPlayerIndex(0)
-{
-}
-
 void Game::addPlayer(std::string playerName)
 {
     if (players.size() >= MAX_N_PLAYERS)

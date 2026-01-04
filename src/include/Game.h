@@ -5,7 +5,6 @@
 #include <vector>
 
 #include "Player.h"
-#include "Question.h"
 #include "QuestionManager.h"
 
 #define WINNING_N_COINS 6
@@ -22,8 +21,9 @@
 class Game
 {
   public:
-    Game();
-
+    Game() : currentPlayerIndex(0)
+    {
+    }
     
     void initGameLoop();
     
@@ -41,11 +41,6 @@ class Game
     std::vector<Player> players;
 
     QuestionManager questionManager;
-
-    std::list<std::string> popQuestions;
-    std::list<std::string> scienceQuestions;
-    std::list<std::string> sportsQuestions;
-    std::list<std::string> rockQuestions;
 
     size_t currentPlayerIndex;
 

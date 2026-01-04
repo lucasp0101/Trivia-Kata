@@ -1,5 +1,4 @@
 #include "Player.h"
-#include "Question.h"
 #include <iostream>
 
 void Player::increaseCoinsBy(int quantity){
