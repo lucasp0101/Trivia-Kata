@@ -60,7 +60,8 @@ void Game::updateCurrentPlayersPositionAfterRoll(int roll)
     int new_position = (players[currentPlayerIndex].getPlace() + roll) % MAX_PLACE_PLAYER;
     players[currentPlayerIndex].setPlace(new_position);
 
-    std::cout << players[currentPlayerIndex].getName() << "'s new location is " << players[currentPlayerIndex].getPlace() << std::endl;
+    std::cout << players[currentPlayerIndex].getName() << "'s new location is "
+              << players[currentPlayerIndex].getPlace() << std::endl;
 }
 
 void Game::askQuestion()
@@ -112,7 +113,7 @@ void Game::initGameLoop()
 
         bool playerCanAct = canPlayerAct(diceResult);
 
-        if(playerCanAct)
+        if (playerCanAct)
         {
             updateCurrentPlayersPositionAfterRoll(diceResult);
             askQuestion();
@@ -131,10 +132,9 @@ void Game::initGameLoop()
         else
         {
             std::cout << "Question was incorrectly answered" << std::endl;
-    
+
             std::cout << players[currentPlayerIndex].getName() + " was sent to the penalty box" << std::endl;
             players[currentPlayerIndex].setInPenalty(true);
-    
         }
         advanceCurrentPlayer();
     }
@@ -143,8 +143,8 @@ void Game::initGameLoop()
 void Game::increaseCurrentPlayersCoins()
 {
     players[currentPlayerIndex].setPurse(players[currentPlayerIndex].getPurse() + 1);
-    std::cout << players[currentPlayerIndex].getName() << " now has " << players[currentPlayerIndex].getPurse() << " Gold Coins."
-              << std::endl;
+    std::cout << players[currentPlayerIndex].getName() << " now has " << players[currentPlayerIndex].getPurse()
+              << " Gold Coins." << std::endl;
 }
 
 bool Game::canPlayerAct(int diceResult)

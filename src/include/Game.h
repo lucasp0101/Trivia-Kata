@@ -12,24 +12,24 @@
 #define WINNING_N_COINS 6
 #define MAX_PLACE_PLAYER 12
 
-// * An unlimited players vector and statically-defined sized places/purses... arrays 
-// * present a contradictary idea for how many players should be allowed to play. 
+// * An unlimited players vector and statically-defined sized places/purses... arrays
+// * present a contradictary idea for how many players should be allowed to play.
 // * Because the fixed size was defined with a magic number, and in a real situation I
 // * wouldn't be sure if unlimited players could have other side effects, I chose to keep
-// * the maximum number of players. 
+// * the maximum number of players.
 #define MAX_N_PLAYERS 6
 
 class Game
 {
   public:
     Game();
-    
+
     std::string createPopQuestion(int index);
-    
+
     std::string createScienceQuestion(int index);
-    
+
     std::string createSportsQuestion(int index);
-    
+
     void initGameLoop();
 
     void increaseCurrentPlayersCoins();
@@ -57,12 +57,10 @@ class Game
     std::list<std::string> scienceQuestions;
     std::list<std::string> sportsQuestions;
     std::list<std::string> rockQuestions;
-    
+
     size_t currentPlayerIndex;
 
     void askQuestion();
 
-    std::string currentCategory();
-    
     bool didPlayerWin();
 };

@@ -1,7 +1,7 @@
 #include "Game.h"
 #include <stdlib.h>
 
-//static bool notAWinner;
+// static bool notAWinner;
 
 int main()
 {
