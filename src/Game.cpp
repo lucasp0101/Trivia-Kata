@@ -29,15 +29,6 @@ void Game::updateCurrentPlayersPositionAfterRoll(int roll)
               << players[currentPlayerIndex].getPlace() << std::endl;
 }
 
-void Game::askQuestion()
-{
-    std::string currentPlayerCategory = players[currentPlayerIndex].currentCategory();
-
-    std::cout << "The category is " << currentPlayerCategory << std::endl;
-
-    questionManager.askQuestion(currentPlayerCategory);
-}
-
 void Game::advanceCurrentPlayer()
 {
     currentPlayerIndex++;
@@ -68,7 +59,7 @@ void Game::initGameLoop()
         if (playerCanAct)
         {
             updateCurrentPlayersPositionAfterRoll(diceResult);
-            askQuestion();
+            questionManager.askQuestion(players[currentPlayerIndex].getPlace());
         }
 
         if (questionManager.questionWasAnsweredCorrectly())

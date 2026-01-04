@@ -43,8 +43,6 @@ class Player
                ", inPenalty: " + (inPenalty ? "true" : "false") + ")";
     }
 
-    std::string currentCategory();
-
     void increaseCoinsBy(int quantity);
 
   private:

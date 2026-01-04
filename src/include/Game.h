@@ -49,7 +49,5 @@ class Game
 
     size_t currentPlayerIndex;
 
-    void askQuestion();
-
     bool didPlayerWin();
 };

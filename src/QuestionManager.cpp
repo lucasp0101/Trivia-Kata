@@ -7,8 +7,29 @@ bool QuestionManager::questionWasAnsweredCorrectly()
     return rand() % 9 != 7;
 }
 
-void QuestionManager::askQuestion(std::string currentPlayerCategory)
+std::string QuestionManager::currentCategory(int playerPlace)
 {
+    switch (playerPlace % MAX_N_CATEGORIES)
+    {
+    case 0:
+        return "Pop";
+        break;
+    case 1:
+        return "Science";
+        break;
+    case 2:
+        return "Sports";
+        break;
+    default:
+        return "Rock";
+    }
+}
+
+void QuestionManager::askQuestion(int playerPlace)
+{
+    std::string currentPlayerCategory = currentCategory(playerPlace);
+    std::cout << "The category is " << currentPlayerCategory << std::endl;
+
     if (currentPlayerCategory == "Pop")
     {
         std::cout << "Pop Question " << popQuestionIndex << std::endl;

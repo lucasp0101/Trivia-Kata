@@ -4,6 +4,7 @@
 
 #define MAX_N_QUESTIONS_PER_CATEGORY 50
 #define MAX_QUESTION_LENGTH 127
+#define MAX_N_CATEGORIES 4
 
 class QuestionManager
 {
@@ -14,7 +15,9 @@ class QuestionManager
 
     bool questionWasAnsweredCorrectly();
 
-    void askQuestion(std::string currentPlayerCategory);
+    std::string currentCategory(int playerPlace);
+
+    void askQuestion(int playerPlace);
     
   private:
     unsigned int popQuestionIndex;
