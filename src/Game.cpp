@@ -7,41 +7,6 @@
 
 Game::Game() : currentPlayerIndex(0)
 {
-    for (int i = 0; i < MAX_N_QUESTIONS_PER_CATEGORY; i++)
-    {
-        popQuestions.push_back(createPopQuestion(i));
-        scienceQuestions.push_back(createScienceQuestion(i));
-        sportsQuestions.push_back(createSportsQuestion(i));
-        rockQuestions.push_back(createRockQuestion(i));
-    }
-}
-
-std::string Game::createPopQuestion(int index)
-{
-    char indexStr[MAX_QUESTION_LENGTH];
-    sprintf(indexStr, "Pop Question %d", index);
-    return indexStr;
-}
-
-std::string Game::createScienceQuestion(int index)
-{
-    char indexStr[MAX_QUESTION_LENGTH];
-    sprintf(indexStr, "Science Question %d", index);
-    return indexStr;
-}
-
-std::string Game::createSportsQuestion(int index)
-{
-    char indexStr[MAX_QUESTION_LENGTH];
-    sprintf(indexStr, "Sports Question %d", index);
-    return indexStr;
-}
-
-std::string Game::createRockQuestion(int index)
-{
-    char indexStr[MAX_QUESTION_LENGTH];
-    sprintf(indexStr, "Rock Question %d", index);
-    return indexStr;
 }
 
 void Game::addPlayer(std::string playerName)
@@ -70,26 +35,7 @@ void Game::askQuestion()
 
     std::cout << "The category is " << currentPlayerCategory << std::endl;
 
-    if (currentPlayerCategory == "Pop")
-    {
-        std::cout << popQuestions.front() << std::endl;
-        popQuestions.pop_front();
-    }
-    else if (currentPlayerCategory == "Science")
-    {
-        std::cout << scienceQuestions.front() << std::endl;
-        scienceQuestions.pop_front();
-    }
-    else if (currentPlayerCategory == "Sports")
-    {
-        std::cout << sportsQuestions.front() << std::endl;
-        sportsQuestions.pop_front();
-    }
-    else if (currentPlayerCategory == "Rock")
-    {
-        std::cout << rockQuestions.front() << std::endl;
-        rockQuestions.pop_front();
-    }
+    questionManager.askQuestion(currentPlayerCategory);
 }
 
 void Game::advanceCurrentPlayer()
@@ -125,7 +71,7 @@ void Game::initGameLoop()
             askQuestion();
         }
 
-        if (questionWasAnsweredCorrectly())
+        if (questionManager.questionWasAnsweredCorrectly())
         {
             if (playerCanAct)
             {
@@ -162,14 +108,6 @@ bool Game::doesPlayerGetOutOfPenaltyBox(int diceResult)
         std::cout << players[currentPlayerIndex].getName() << " is getting out of the penalty box" << std::endl;
         return true;
     }
-    else
-    {
-        std::cout << players[currentPlayerIndex].getName() << " is not getting out of the penalty box" << std::endl;
-        return false;
-    }
-}
-
-bool Game::questionWasAnsweredCorrectly()
-{
-    return rand() % 9 != 7;
+    std::cout << players[currentPlayerIndex].getName() << " is not getting out of the penalty box" << std::endl;
+    return false;
 }

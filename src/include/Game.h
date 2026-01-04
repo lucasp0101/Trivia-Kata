@@ -6,9 +6,8 @@
 
 #include "Player.h"
 #include "Question.h"
+#include "QuestionManager.h"
 
-#define MAX_N_QUESTIONS_PER_CATEGORY 50
-#define MAX_QUESTION_LENGTH 127
 #define WINNING_N_COINS 6
 #define MAX_PLACE_PLAYER 12
 #define REWARD_FOR_CORRECT_ANSWER 1
@@ -25,22 +24,13 @@ class Game
   public:
     Game();
 
-    std::string createPopQuestion(int index);
-
-    std::string createScienceQuestion(int index);
-
-    std::string createSportsQuestion(int index);
-
+    
     void initGameLoop();
-
+    
     int rollDice();
-
+    
     bool doesPlayerGetOutOfPenaltyBox(int diceResult);
-
-    bool questionWasAnsweredCorrectly();
-
-    std::string createRockQuestion(int index);
-
+    
     void addPlayer(std::string playerName);
 
     void updateCurrentPlayersPositionAfterRoll(int roll);
@@ -49,6 +39,8 @@ class Game
 
   private:
     std::vector<Player> players;
+
+    QuestionManager questionManager;
 
     std::list<std::string> popQuestions;
     std::list<std::string> scienceQuestions;
