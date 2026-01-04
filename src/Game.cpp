@@ -124,7 +124,7 @@ void Game::initGameLoop()
             if (playerCanAct)
             {
                 std::cout << "Answer was correct!!!!" << std::endl;
-                increaseCurrentPlayersCoins();
+                players[currentPlayerIndex].increaseCoinsBy(REWARD_FOR_CORRECT_ANSWER);
 
                 thereIsWinner = didPlayerWin();
             }
@@ -138,11 +138,6 @@ void Game::initGameLoop()
         }
         advanceCurrentPlayer();
     }
-}
-
-void Game::increaseCurrentPlayersCoins()
-{
-    players[currentPlayerIndex].increaseCoinsBy(REWARD_FOR_CORRECT_ANSWER);
 }
 
 bool Game::canPlayerAct(int diceResult)
