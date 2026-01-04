@@ -24,6 +24,7 @@ void QuestionManager::askQuestion(int playerPlace)
     int questionCategoryIndex = getCategoryFromPlayerPlace(playerPlace);
     std::cout << "The category is " << questionData[questionCategoryIndex].categoryName << std::endl;
 
-    std::cout << questionData[questionCategoryIndex].categoryName << " Question " << questionData[questionCategoryIndex].currentQuestionCounter << std::endl;
+    std::cout << questionData[questionCategoryIndex].categoryName << " Question "
+              << questionData[questionCategoryIndex].currentQuestionCounter << std::endl;
     questionData[questionCategoryIndex].currentQuestionCounter++;
 }

@@ -24,13 +24,13 @@ class Game
     Game() : currentPlayerIndex(0)
     {
     }
-    
+
     void initGameLoop();
-    
+
     int rollDice();
-    
+
     bool doesPlayerGetOutOfPenaltyBox(int diceResult);
-    
+
     void addPlayer(std::string playerName);
 
     void updateCurrentPlayersPositionAfterRoll(int roll);

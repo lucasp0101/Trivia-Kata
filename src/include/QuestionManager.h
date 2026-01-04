@@ -1,6 +1,6 @@
 #pragma once
-#include <string>
 #include <list>
+#include <string>
 #include <vector>
 
 #define MAX_N_QUESTIONS_PER_CATEGORY 50
@@ -11,8 +11,8 @@ const std::string AVAILABLE_CATEGORIES[] = {"Pop", "Science", "Sports", "Rock"};
 
 struct QuestionCategoryGameInfo
 {
-  std::string categoryName;
-  unsigned int currentQuestionCounter;
+    std::string categoryName;
+    unsigned int currentQuestionCounter;
 };
 
 class QuestionManager
@@ -21,9 +21,9 @@ class QuestionManager
     QuestionManager();
 
     bool questionWasAnsweredCorrectly();
-    
+
     void askQuestion(int playerPlace);
-    
+
   private:
     std::vector<QuestionCategoryGameInfo> questionData;
 
