@@ -5,10 +5,10 @@
 #include <vector>
 
 #include "Player.h"
+#include "Question.h"
 
 #define MAX_N_QUESTIONS_PER_CATEGORY 50
 #define MAX_QUESTION_LENGTH 127
-#define MAX_N_CATECORIES 4
 #define WINNING_N_COINS 6
 #define MAX_PLACE_PLAYER 12
 
@@ -38,7 +38,7 @@ class Game
 
     int rollDice();
 
-    bool playerGetsOutOfPenaltyBox(int diceResult);
+    bool doesPlayerGetOutOfPenaltyBox(int diceResult);
 
     bool questionWasAnsweredCorrectly();
 

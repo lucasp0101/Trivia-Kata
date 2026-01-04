@@ -25,9 +25,11 @@ class Player
            ", inPenalty: " + (inPenalty ? "true" : "false") + ")";
   }
 
+  std::string currentCategory();
+  
   private:
     std::string name;
     int place;
     int purse;
     bool inPenalty;
-};
+  };

@@ -65,45 +65,29 @@ void Game::updateCurrentPlayersPositionAfterRoll(int roll)
 
 void Game::askQuestion()
 {
-    std::cout << "The category is " << currentCategory() << std::endl;
+    std::string currentPlayerCategory = players[currentPlayerIndex].currentCategory();
 
-    if (currentCategory() == "Pop")
+    std::cout << "The category is " << currentPlayerCategory << std::endl;
+
+    if (currentPlayerCategory == "Pop")
     {
         std::cout << popQuestions.front() << std::endl;
         popQuestions.pop_front();
     }
-    else if (currentCategory() == "Science")
+    else if (currentPlayerCategory == "Science")
     {
         std::cout << scienceQuestions.front() << std::endl;
         scienceQuestions.pop_front();
     }
-    else if (currentCategory() == "Sports")
+    else if (currentPlayerCategory == "Sports")
     {
         std::cout << sportsQuestions.front() << std::endl;
         sportsQuestions.pop_front();
     }
-    else if (currentCategory() == "Rock")
+    else if (currentPlayerCategory == "Rock")
     {
         std::cout << rockQuestions.front() << std::endl;
         rockQuestions.pop_front();
-    }
-}
-
-std::string Game::currentCategory()
-{
-    switch (players[currentPlayerIndex].getPlace() % MAX_N_CATECORIES)
-    {
-        case 0:
-            return "Pop";
-            break;
-        case 1:
-            return "Science";
-            break;
-        case 2:
-            return "Sports";
-            break;
-        default:
-            return "Rock";
     }
 }
 
@@ -167,16 +151,7 @@ bool Game::canPlayerAct(int diceResult)
 {
     if (players[currentPlayerIndex].getInPenalty())
     {
-        if (playerGetsOutOfPenaltyBox(diceResult))
-        {
-            std::cout << players[currentPlayerIndex].getName() << " is getting out of the penalty box" << std::endl;
-            return true;
-        }
-        else
-        {
-            std::cout << players[currentPlayerIndex].getName() << " is not getting out of the penalty box" << std::endl;
-            return false;
-        }
+        return doesPlayerGetOutOfPenaltyBox(diceResult);
     }
 
     return true;
@@ -191,9 +166,18 @@ int Game::rollDice()
     return diceResult;
 }
 
-bool Game::playerGetsOutOfPenaltyBox(int diceResult)
+bool Game::doesPlayerGetOutOfPenaltyBox(int diceResult)
 {
-    return diceResult % 2 != 0;
+    if (diceResult % 2 != 0)
+    {
+        std::cout << players[currentPlayerIndex].getName() << " is getting out of the penalty box" << std::endl;
+        return true;
+    }
+    else
+    {
+        std::cout << players[currentPlayerIndex].getName() << " is not getting out of the penalty box" << std::endl;
+        return false;
+    }
 }
 
 bool Game::questionWasAnsweredCorrectly()
