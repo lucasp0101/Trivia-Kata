@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Question.h"
+#include <iostream>
 
 std::string Player::currentCategory()
 {
@@ -17,4 +18,9 @@ std::string Player::currentCategory()
     default:
         return "Rock";
     }
+}
+
+void Player::increaseCoinsBy(int quantity){
+    this->purse += quantity;
+    std::cout << this->name << " now has " << this->purse << " Gold Coins." << std::endl;
 }

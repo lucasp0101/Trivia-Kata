@@ -11,6 +11,7 @@
 #define MAX_QUESTION_LENGTH 127
 #define WINNING_N_COINS 6
 #define MAX_PLACE_PLAYER 12
+#define REWARD_FOR_CORRECT_ANSWER 1
 
 // * An unlimited players vector and statically-defined sized places/purses... arrays
 // * present a contradictary idea for how many players should be allowed to play.

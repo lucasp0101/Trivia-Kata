@@ -27,10 +27,6 @@ class Player
     {
         return purse;
     }
-    void setPurse(int purse_)
-    {
-        purse = purse_;
-    }
 
     bool getInPenalty() const
     {
@@ -48,6 +44,8 @@ class Player
     }
 
     std::string currentCategory();
+
+    void increaseCoinsBy(int quantity);
 
   private:
     std::string name;

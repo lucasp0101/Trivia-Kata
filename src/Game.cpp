@@ -142,9 +142,7 @@ void Game::initGameLoop()
 
 void Game::increaseCurrentPlayersCoins()
 {
-    players[currentPlayerIndex].setPurse(players[currentPlayerIndex].getPurse() + 1);
-    std::cout << players[currentPlayerIndex].getName() << " now has " << players[currentPlayerIndex].getPurse()
-              << " Gold Coins." << std::endl;
+    players[currentPlayerIndex].increaseCoinsBy(REWARD_FOR_CORRECT_ANSWER);
 }
 
 bool Game::canPlayerAct(int diceResult)
